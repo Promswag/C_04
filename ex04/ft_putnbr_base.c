@@ -6,7 +6,7 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 10:44:05 by gbaumgar          #+#    #+#             */
-/*   Updated: 2022/01/20 15:37:26 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:46:42 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,16 @@ void	ft_putnbr_base(int nbr, char *base)
 	unsigned int	size;
 	unsigned int	scale;
 
-	_nbr = nbr;
-	size = ft_strlen(base);
-	scale = ft_power_of_x(nbr, size);
 	if (!ft_base_is_valid(base))
 		return ;
+	_nbr = nbr;
+	if (nbr < 0)
+	{
+		ft_putchar('-');
+		_nbr = nbr * -1;
+	}
+	size = ft_strlen(base);
+	scale = ft_power_of_x(_nbr, size);
 	while (scale != 1)
 	{
 		ft_putchar(base[_nbr / scale]);
