@@ -6,16 +6,9 @@
 /*   By: gbaumgar <gbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 10:44:04 by gbaumgar          #+#    #+#             */
-/*   Updated: 2022/01/19 12:58:24 by gbaumgar         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:35:20 by gbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int	ft_char_is_numeric(char c)
-{	
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
 
 int	ft_char_is_whitespace(char c)
 {	
@@ -35,35 +28,27 @@ int	ft_char_is_whitespace(char c)
 	return (0);
 }
 
-int	ft_sign_handle(char c, int sign)
-{
-	if (c == '-')
-		return (-sign);
-	return (sign);
-}
-
 int	ft_atoi(char *str)
 {
-	int		i;
-	int		sign;
-	int		result;
+	int			i;
+	int			sign;
+	long int	result;
 
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (str[i] != '\0')
+	while (ft_char_is_whitespace(str[i]))
+		i++;
+	while (str[i] == '-' || str[i] == '+')
 	{
-		if (str[i] == '-' || str[i] == '+')
-			sign = ft_sign_handle(str[i++], sign);
-		else if (ft_char_is_whitespace(str[i]))
-			i++;
-		else if (ft_char_is_numeric(str[i]))
-		{
-			result = result * 10 + str[i] - 48;
-			i++;
-		}
-		else
-			break ;
+		if (str[i] == '-')
+			sign = -sign;
+		i++;
+	}
+	while ((str[i]) >= 48 && str[i] <= 57)
+	{
+		result = result * 10 + str[i] - 48;
+		i++;
 	}
 	return (result * sign);
 }
